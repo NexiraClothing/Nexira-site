@@ -39,6 +39,7 @@ app.post('/create-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
+            allow_promotion_codes: true, // Make sure this is enabled
             success_url: 'https://nexira-site.onrender.com?success=true',
             cancel_url: 'https://nexira-site.onrender.com?canceled=true',
             shipping_address_collection: {
@@ -49,7 +50,7 @@ app.post('/create-checkout-session', async (req, res) => {
                     shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: {
-                            amount: 199,
+                            amount: 500,
                             currency: 'gbp',
                         },
                         display_name: 'Standard Shipping',
@@ -89,6 +90,38 @@ app.get('/', (req, res) => {
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something broke!' });
+});
+
+// Add this new endpoint to create a free shipping coupon
+app.post('/create-free-shipping-coupon', async (req, res) => {
+    try {
+        // First create a coupon for free shipping
+        const coupon = await stripe.coupons.create({
+            name: 'Free Shipping',
+            amount_off: 500, // This should match your shipping cost (in cents)
+            currency: 'gbp',
+            duration: 'once',
+            applies_to: {
+                shipping: true
+            }
+        });
+
+        // Create a promotion code that uses this coupon
+        const promotionCode = await stripe.promotionCodes.create({
+            coupon: coupon.id,
+            code: process.env.PRIV_SHIPPING, // Your custom code for customers to enter
+            max_redemptions: 999999, // Maximum number of times this code can be used
+            expires_at: Math.floor(Date.now() / 1000) + (90 * 24 * 60 * 60) // Expires in 90 days
+        });
+
+        res.json({
+            message: 'Free shipping promotion code created successfully',
+            promotionCode: promotionCode
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: error.message });
+    }
 });
 
 const PORT = process.env.PORT || 3000;
