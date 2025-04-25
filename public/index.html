@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nexira</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <video class="logo" autoplay muted loop playsinline>
+            <source src="Nexira-Images/Nexira-animation.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="nav-links">
+            <a href="#">Catalog</a>
+            <a href="#">Sale</a>
+            <a href="#">About Us</a>
+        </div>
+
+        <!-- Cart Icon -->
+        <div class="cart-container">
+            <i class="fas fa-shopping-cart cart-icon" onclick="toggleCart()"></i>
+            <span class="cart-count">0</span>
+        </div>
+
+        <!-- Cart Modal -->
+        <div id="cartModal" class="cart-modal">
+            <div class="cart-modal-content">
+                <h3>Your Cart</h3>
+                <div id="cartItems">
+                    <!-- Cart items will be inserted here -->
+                </div>
+                <div id="cartTotal">Total: $0.00</div>
+                <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCT SECTION -->
+    <div class="product-container">
+        <div class="product-card">
+            <img src="Nexira-Images/Nexira-tshirt-black-embroidery-black.png" 
+                 alt="Nexira T-shirt" 
+                 class="product-image" 
+                 id="mainTshirtImage" 
+                 onclick="openModal()" />
+            
+            <div class="product-info">
+                <h2 class="product-title">Nexira Embroidery T-shirt</h2>
+                <p class="product-description">Made with soft fabric and precision embroidery, this stylish t-shirt offers a comfortable, timeless look that pairs perfectly with any casual outfit.</p>
+                <p class="product-price">£17.99</p>
+                <button class="buy-button" onclick="openModal()">Customize T-shirt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customization Modal -->
+    <div class="overlay" id="overlay" onclick="closeModal()"></div>
+    <div id="sizeModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="Nexira-Images/Nexira-tshirt-black-embroidery-black.png" alt="T-shirt Preview" />
+            
+            <div class="color-options">
+                <div>
+                    <h4>T-Shirt Color:</h4>
+                    <div class="colors">
+                        <div class="color-square" style="background-color: rgb(0, 0, 0);" onclick="selectColor(this, 'black', true)"></div>
+                        <div class="color-square" style="background-color: rgb(51, 51, 102);" onclick="selectColor(this, 'navy', true)"></div>
+                        <div class="color-square" style="background-color: rgb(107, 82, 148);" onclick="selectColor(this, 'purple', true)"></div>
+                        <div class="color-square" style="background-color: rgb(150, 161, 168);" onclick="selectColor(this, 'grey', true)"></div>
+                        <div class="color-square" style="background-color: rgb(255, 204, 0);" onclick="selectColor(this, 'gold', true)"></div>
+                        <div class="color-square" style="background-color: rgb(255, 255, 255);" onclick="selectColor(this, 'white', true)"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>Thread Color:</h4>
+                    <div class="threads">
+                        <div class="color-square" style="background-color: rgb(0, 0, 0);" onclick="selectColor(this, 'black', false)"></div>
+                        <div class="color-square" style="background-color: rgb(51, 51, 102);" onclick="selectColor(this, 'navy', false)"></div>
+                        <div class="color-square" style="background-color: rgb(107, 82, 148);" onclick="selectColor(this, 'purple', false)"></div>
+                        <div class="color-square" style="background-color: rgb(150, 161, 168);" onclick="selectColor(this, 'grey', false)"></div>
+                        <div class="color-square" style="background-color: rgb(255, 204, 0);" onclick="selectColor(this, 'gold', false)"></div>
+                        <div class="color-square" style="background-color: rgb(255, 255, 255);" onclick="selectColor(this, 'white', false)"></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>Size:</h4>
+                    <div class="sizes">
+                        <button class="size-button" onclick="selectSize('S')">S</button>
+                        <button class="size-button" onclick="selectSize('M')">M</button>
+                        <button class="size-button" onclick="selectSize('L')">L</button>
+                        <button class="size-button" onclick="selectSize('XL')">XL</button>
+                    </div>
+                </div>
+                
+                <button class="buy-button" onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- Size Modal -->
+<div class="modal-background" id="sizeModal">
+    <div class="modal-content">
+        <!-- your existing modal content -->
+    </div>
+</div>
+
+<!-- Cart Modal -->
+<div class="modal-background" id="cartModal">
+    <div class="cart-modal-content">
+        <!-- your existing cart modal content -->
+    </div>
+</div>
+
