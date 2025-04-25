@@ -182,7 +182,7 @@ async function checkout() {
     }
     
     try {
-        const response = await fetch('http://localhost:3000/create-checkout-session', {  // Changed this line
+        const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -202,6 +202,7 @@ async function checkout() {
         alert('There was a problem with the checkout process.');
     }
 }
+
 
 // Initialize cart on page load
 document.addEventListener('DOMContentLoaded', () => {
