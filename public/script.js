@@ -192,7 +192,7 @@ async function checkout() {
                     ...item,
                     quantity: item.quantity || 1
                 })),
-                // Update these URLs to use your Render domain
+                // Hardcode the Render URLs
                 success_url: 'https://nexira-site.onrender.com?success=true',
                 cancel_url: 'https://nexira-site.onrender.com?canceled=true'
             })
