@@ -98,12 +98,9 @@ app.post('/create-free-shipping-coupon', async (req, res) => {
         // First create a coupon for free shipping
         const coupon = await stripe.coupons.create({
             name: 'Free Shipping',
-            amount_off: 500, // This should match your shipping cost (in cents)
+            amount_off: 199, // This should match your shipping cost (in cents)
             currency: 'gbp',
-            duration: 'once',
-            applies_to: {
-                shipping: true
-            }
+            duration: 'once'
         });
 
         // Create a promotion code that uses this coupon
@@ -111,7 +108,10 @@ app.post('/create-free-shipping-coupon', async (req, res) => {
             coupon: coupon.id,
             code: process.env.PRIV_SHIPPING, // Your custom code for customers to enter
             max_redemptions: 999999, // Maximum number of times this code can be used
-            expires_at: Math.floor(Date.now() / 1000) + (90 * 24 * 60 * 60) // Expires in 90 days
+            expires_at: Math.floor(Date.now() / 1000) + (90 * 24 * 60 * 60), // Expires in 90 days
+            restrictions: {
+                applies_to_shipping: true
+            }
         });
 
         res.json({
