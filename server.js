@@ -8,19 +8,27 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['https://nexira-site.onrender.com', 'http://localhost:3000'],
+    credentials: true
+}));
 
-// Serve static files - this line is crucial
+// Serve static files
 app.use(express.static('public'));
 
 // Create checkout session endpoint
 app.post('/create-checkout-session', async (req, res) => {
     try {
+        if (!req.body.items || !Array.isArray(req.body.items)) {
+            return res.status(400).json({ error: 'Invalid request body' });
+        }
+
         const lineItems = req.body.items.map(item => ({
             price_data: {
                 currency: 'gbp',
                 product_data: {
                     name: `T-Shirt (${item.size}) - ${item.shirtColor} with ${item.threadColor} embroidery`,
+                    description: 'Custom Embroidered T-Shirt'
                 },
                 unit_amount: Math.round(item.price * 100),
             },
@@ -31,8 +39,33 @@ app.post('/create-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            success_url: 'http://localhost:3000?success=true',
-            cancel_url: 'http://localhost:3000?canceled=true'
+            success_url: 'https://nexira-site.onrender.com?success=true',
+            cancel_url: 'https://nexira-site.onrender.com?canceled=true',
+            shipping_address_collection: {
+                allowed_countries: ['GB']
+            },
+            shipping_options: [
+                {
+                    shipping_rate_data: {
+                        type: 'fixed_amount',
+                        fixed_amount: {
+                            amount: 500,
+                            currency: 'gbp',
+                        },
+                        display_name: 'Standard Shipping',
+                        delivery_estimate: {
+                            minimum: {
+                                unit: 'business_day',
+                                value: 5,
+                            },
+                            maximum: {
+                                unit: 'business_day',
+                                value: 7,
+                            },
+                        },
+                    },
+                }
+            ]
         });
         
         res.json({ url: session.url });
@@ -42,9 +75,20 @@ app.post('/create-checkout-session', async (req, res) => {
     }
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'healthy' });
+});
+
 // Root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something broke!' });
 });
 
 const PORT = process.env.PORT || 3000;
