@@ -191,7 +191,9 @@ async function checkout() {
                 items: cartItems.map(item => ({
                     ...item,
                     quantity: item.quantity || 1
-                }))
+                })),
+                success_url: `${window.location.origin}?success=true`,
+                cancel_url: `${window.location.origin}?canceled=true`
             })
         });
 
@@ -204,18 +206,23 @@ async function checkout() {
 }
 
 
+
 // Initialize cart on page load
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('success')) {
         cartItems = [];
         updateCartDisplay();
+        updateCartCount();
         alert('Thank you for your purchase!');
+        // Clear the URL parameters
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
     if (urlParams.get('canceled')) {
         alert('Order canceled -- continue to shop around and checkout when you\'re ready.');
+        // Clear the URL parameters
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
-    updateCartCount();
 });
 
 document.addEventListener('mousedown', function(event) {
