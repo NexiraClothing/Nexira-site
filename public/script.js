@@ -192,8 +192,9 @@ async function checkout() {
                     ...item,
                     quantity: item.quantity || 1
                 })),
-                success_url: `${window.location.origin}?success=true`,
-                cancel_url: `${window.location.origin}?canceled=true`
+                // Update these URLs to use your Render domain
+                success_url: 'https://nexira-site.onrender.com?success=true',
+                cancel_url: 'https://nexira-site.onrender.com?canceled=true'
             })
         });
 
@@ -204,8 +205,6 @@ async function checkout() {
         alert('There was a problem with the checkout process.');
     }
 }
-
-
 
 // Initialize cart on page load
 document.addEventListener('DOMContentLoaded', () => {
