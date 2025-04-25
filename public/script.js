@@ -191,35 +191,39 @@ async function checkout() {
                 items: cartItems.map(item => ({
                     ...item,
                     quantity: item.quantity || 1
-                })),
-                // Hardcode the Render URLs
-                success_url: 'https://nexira-site.onrender.com?success=true',
-                cancel_url: 'https://nexira-site.onrender.com?canceled=true'
+                }))
             })
         });
 
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
         const { url } = await response.json();
-        window.location = url;
+        // Redirect to Stripe Checkout
+        window.location.href = url;
     } catch (error) {
         console.error('Error:', error);
         alert('There was a problem with the checkout process.');
     }
 }
 
-// Initialize cart on page load
+// Initialize cart and handle success/cancel redirects
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
+    
     if (urlParams.get('success')) {
-        cartItems = [];
+        cartItems = []; // Clear the cart
         updateCartDisplay();
         updateCartCount();
         alert('Thank you for your purchase!');
-        // Clear the URL parameters
+        // Clean up the URL
         window.history.replaceState({}, document.title, window.location.pathname);
     }
+    
     if (urlParams.get('canceled')) {
         alert('Order canceled -- continue to shop around and checkout when you\'re ready.');
-        // Clear the URL parameters
+        // Clean up the URL
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 });
