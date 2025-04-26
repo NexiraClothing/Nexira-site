@@ -201,6 +201,24 @@ body {
   border-radius: 12px;
 }
 
+#sizeModal .sizes .size-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+#sizeModal .sizes .size-button.selected {
+  background-color: rgb(0, 0, 0) !important;
+  color: rgb(255, 255, 255) !important;
+  border-color: rgb(255, 0, 0) !important;
+}
+
 .modal-content {
   display: flex;
   align-items: flex-start;
@@ -272,7 +290,7 @@ body {
 }
 
 .buy-button:hover {
-  background-color: #ff0000;
+  background-color: #272626;
 }
 
 .sizes {
@@ -281,24 +299,28 @@ body {
   margin-top: 10px;
 }
 
-.size-button {
-  padding: 8px 16px;
-  border: 2px solid black;
-  cursor: pointer;
-  border-radius: 4px;
-  user-select: none;
-  background: white;
-  transition: all 0.2s ease;
-}
-
 .size-button:hover {
   background-color: #f0f0f0;
 }
 
+.size-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
 .size-button.selected {
   background-color: black;
-  color: white;
+  color: red;
+  border-color: black;
 }
+
 
 /* === ANIMATIONS === */
 .bounce {

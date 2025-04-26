@@ -23,6 +23,7 @@ function toggleCart() {
 }
 
 function selectSize(size, event) {
+    if (!event) return; // Guard clause
     currentSize = size;
     const sizeButtons = document.getElementsByClassName('size-button');
     Array.from(sizeButtons).forEach(button => {
@@ -30,8 +31,6 @@ function selectSize(size, event) {
     });
     event.target.classList.add('selected');
 }
-
-
 
 function selectColor(element, color, isShirtColor) {
     const squares = element.parentElement.getElementsByClassName('color-square');
