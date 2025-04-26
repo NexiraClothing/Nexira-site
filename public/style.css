@@ -268,7 +268,7 @@ body {
   cursor: pointer;
   transition: 0.3s ease;
   margin-top: 20px;
-  width: auto; /* Changed from any fixed width to auto */
+  width: 150px;
 }
 
 .buy-button:hover {
@@ -282,18 +282,17 @@ body {
 }
 
 .size-button {
-  padding: 10px 20px;
-  margin: 5px;
-  border: 1px solid black;
-  background-color: white;
-  color: black;
+  padding: 8px 16px;
+  border: 2px solid black;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  user-select: none;
+  background: white;
+  transition: all 0.2s ease;
 }
 
-.size-button.selected {
-  background-color: black;
-  color: white;
+.size-button:hover {
+  background-color: #f0f0f0;
 }
 
 .size-button.selected {
@@ -349,11 +348,61 @@ body {
   align-items: center;
   z-index: 1000;
 }
+/*MEDIA STYLE.CSS*/
 
-/* === MOBILE STYLES === */
 @media (max-width: 768px) {
+  #sizeModal {
+      width: 90%;
+      height: auto;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+
+  .modal-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+
+  #modalImage {
+      max-width: 100%;
+      max-height: 35vh;
+      width: auto;
+      margin: 0 auto;
+  }
+
+  .color-options {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+  }
+
+  .colors, .threads {
+      justify-content: center;
+      width: 100%;
+      gap: 10px;
+  }
+
+  .sizes {
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      gap: 10px;
+  }
+
+  .size-button {
+      margin: 0;
+  }
+
   .product-container {
       padding: 20px;
+      flex-direction: column;
   }
 
   .product-card {
@@ -367,71 +416,26 @@ body {
       max-height: 40vh;
   }
 
-  #sizeModal {
-    height: auto;
-    max-height: 85vh;
-    width: 90%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    overflow-y: auto;
-}
-  .modal-content {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-}
-#modalImage {
-  max-height: 35vh;
-  width: auto;
-  object-fit: contain;
-  margin: 0 auto;
-}
-}
-
-  .buy-button {
-      position: static;
+  .product-info {
       width: 100%;
+      align-items: center;
+      text-align: center;
   }
 
-  .color-options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-}
+  .navbar {
+      padding: 15px;
+  }
 
-.colors, .threads {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+  .logo {
+      height: 80px;
+      margin: -15px 10px -15px 0;
+  }
 
-.sizes {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+  .nav-links {
+      gap: 20px;
+  }
 
-.size-button.selected {
-  background-color: black !important;  /* Force the selected state */
-  color: white !important;
+  .nav-links a {
+      font-size: 15px;
+  }
 }
-
-/* In your mobile media query */
-@media (max-width: 768px) {
-  /* Keep other mobile styles */
-  
-  .buy-button {
-      width: 100%;  /* Full width only on mobile */
-      margin: 20px auto;
-      display: block;
-  }}
