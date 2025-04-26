@@ -268,7 +268,7 @@ body {
   cursor: pointer;
   transition: 0.3s ease;
   margin-top: 20px;
-  width: 150px;
+  width: auto; /* Changed from any fixed width to auto */
 }
 
 .buy-button:hover {
@@ -282,17 +282,18 @@ body {
 }
 
 .size-button {
-  padding: 8px 16px;
-  border: 2px solid black;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
   cursor: pointer;
-  border-radius: 4px;
-  user-select: none;
-  background: white;
-  transition: all 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-.size-button:hover {
-  background-color: #f0f0f0;
+.size-button.selected {
+  background-color: black;
+  color: white;
 }
 
 .size-button.selected {
@@ -366,69 +367,58 @@ body {
       max-height: 40vh;
   }
 
-    #sizeModal {
-        height: auto;
-        max-height: 85vh;
-        width: 90%;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        overflow-y: auto;
-    }
-
-    .modal-content {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    #modalImage {
-        max-height: 35vh;
-        width: auto;
-        object-fit: contain;
-        margin: 0 auto;
-    }
-} /* Only one closing brace here */
+  #sizeModal {
+    height: auto;
+    max-height: 85vh;
+    width: 90%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    overflow-y: auto;
+}
+  .modal-content {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+#modalImage {
+  max-height: 35vh;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+}
 
   .buy-button {
       position: static;
       width: 100%;
   }
 
-    .color-options {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
+  .color-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
 
-    .colors, .threads {
-        justify-content: center;
-        width: 100%;
-    }
+.colors, .threads {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
-    .sizes {
-        justify-content: center;
-        width: 100%;
-    }
-
-    .buy-button {
-/* In your desktop styles (outside media query) */
-.buy-button {
-  padding: 8px 16px;
-  font-size: 14px;
-  background-color: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s ease;
-  margin-top: 20px;
-  width: 150px;  /* This ensures the button stays small on desktop */
+.sizes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .size-button.selected {
@@ -444,4 +434,4 @@ body {
       width: 100%;  /* Full width only on mobile */
       margin: 20px auto;
       display: block;
-  }}}
+  }}
