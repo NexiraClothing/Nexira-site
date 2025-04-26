@@ -138,15 +138,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
-app.get('/verify-session', async (req, res) => {
-    try {
-        const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
-        res.json({
-            status: session.payment_status,
-            customer_email: session.customer_details.email
-        });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});

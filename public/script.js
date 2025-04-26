@@ -22,7 +22,7 @@ function toggleCart() {
     }
 }
 
-function selectSize(size) {
+function selectSize(size, event) {
     currentSize = size;
     const sizeButtons = document.getElementsByClassName('size-button');
     Array.from(sizeButtons).forEach(button => {
@@ -30,6 +30,8 @@ function selectSize(size) {
     });
     event.target.classList.add('selected');
 }
+
+
 
 function selectColor(element, color, isShirtColor) {
     const squares = element.parentElement.getElementsByClassName('color-square');
@@ -50,42 +52,50 @@ function updateModalImage() {
     document.getElementById('modalImage').src = imagePath;
 }
 
-function addToCart() {
+async function addToCart() {
     if (!currentSize) {
         alert('Please select a size');
         return;
     }
 
-    const item = {
-        size: currentSize,
-        shirtColor: currentShirtColor,
-        threadColor: currentThreadColor,
-        price: 17.99,
-        image: `/Nexira-Images/Nexira-tshirt-${currentShirtColor}-embroidery-${currentThreadColor}.png`
-    };
+    const addToCartBtn = document.querySelector('.add-to-cart-button');
+    if (addToCartBtn) addToCartBtn.disabled = true;
 
-    // Check if identical item exists
-    const existingItemIndex = cartItems.findIndex(cartItem => 
-        cartItem.size === item.size && 
-        cartItem.shirtColor === item.shirtColor && 
-        cartItem.threadColor === item.threadColor
-    );
+    try {
+        const item = {
+            size: currentSize,
+            shirtColor: currentShirtColor,
+            threadColor: currentThreadColor,
+            price: 17.99,
+            image: `/Nexira-Images/Nexira-tshirt-${currentShirtColor}-embroidery-${currentThreadColor}.png`
+        };
 
-    if (existingItemIndex !== -1) {
-        // If item exists, increment quantity
-        if (!cartItems[existingItemIndex].quantity) {
-            cartItems[existingItemIndex].quantity = 1;
+        // Check if identical item exists
+        const existingItemIndex = cartItems.findIndex(cartItem => 
+            cartItem.size === item.size && 
+            cartItem.shirtColor === item.shirtColor && 
+            cartItem.threadColor === item.threadColor
+        );
+
+        if (existingItemIndex !== -1) {
+            if (!cartItems[existingItemIndex].quantity) {
+                cartItems[existingItemIndex].quantity = 1;
+            }
+            cartItems[existingItemIndex].quantity++;
+        } else {
+            item.quantity = 1;
+            cartItems.push(item);
         }
-        cartItems[existingItemIndex].quantity++;
-    } else {
-        // If item doesn't exist, add new item with quantity 1
-        item.quantity = 1;
-        cartItems.push(item);
-    }
 
-    updateCartDisplay();
-    updateCartCount();
-    closeModal();
+        updateCartDisplay();
+        updateCartCount();
+        closeModal();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('There was a problem adding the item to cart. Please try again.');
+    } finally {
+        if (addToCartBtn) addToCartBtn.disabled = false;
+    }
 }
 
 function updateCartCount() {
@@ -169,7 +179,13 @@ function removeFromCart(index) {
     if (cartItems[index].quantity > 1) {
         cartItems[index].quantity--;
     } else {
-        cartItems.splice(index, 1);
+        const item = cartItems[index];
+        const confirmRemove = confirm(`Remove ${item.size} ${item.shirtColor} shirt from cart?`);
+        if (confirmRemove) {
+            cartItems.splice(index, 1);
+        } else {
+            return;
+        }
     }
     updateCartDisplay();
     updateCartCount();
@@ -180,6 +196,9 @@ async function checkout() {
         alert('Your cart is empty!');
         return;
     }
+    
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) checkoutBtn.disabled = true;
     
     try {
         const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', {
@@ -196,17 +215,20 @@ async function checkout() {
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const { url } = await response.json();
-        // Redirect to Stripe Checkout
         window.location.href = url;
     } catch (error) {
         console.error('Error:', error);
-        alert('There was a problem with the checkout process.');
+        alert('There was a problem with the checkout process. Please try again.');
+    } finally {
+        if (checkoutBtn) checkoutBtn.disabled = false;
     }
 }
+
+
 
 // Initialize cart and handle success/cancel redirects
 document.addEventListener('DOMContentLoaded', () => {
