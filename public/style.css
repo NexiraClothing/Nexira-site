@@ -399,9 +399,6 @@ body {
       width: 100%;
   }
 
-  @media (max-width: 768px) {
-    /* Keep your existing mobile styles */
-
     .color-options {
         display: flex;
         flex-direction: column;
@@ -421,7 +418,30 @@ body {
     }
 
     .buy-button {
-        margin: 20px auto;
-        display: block;
-    }
+/* In your desktop styles (outside media query) */
+.buy-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 20px;
+  width: 150px;  /* This ensures the button stays small on desktop */
 }
+
+.size-button.selected {
+  background-color: black !important;  /* Force the selected state */
+  color: white !important;
+}
+
+/* In your mobile media query */
+@media (max-width: 768px) {
+  /* Keep other mobile styles */
+  
+  .buy-button {
+      width: 100%;  /* Full width only on mobile */
+      margin: 20px auto;
+      display: block;
+  }}}
