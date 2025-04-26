@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nexira</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<div class="navbar">
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="menu-content">
+            <div class="dropdown-item">
+                <a href="#" class="main-link">Catalog <i class="fas fa-chevron-right"></i></a>
+                <div class="submenu">
+                    <a href="#">T-Shirts</a>
+                    <a href="#">Hoodies</a>
+                    <a href="#">New Arrivals</a>
+                </div>
+            </div>
+            <a href="About-us.html">About Us</a>    
+            <a href="#">Returns</a>
+            <a href="#">Refunds</a>
+        </div>
+    </div>
+
+    <!-- Centered Logo -->
+    <video class="logo" autoplay muted loop playsinline>
+        <source src="Nexira-Images/Nexira-animation.mp4" type="video/mp4">
+    </video>
+
+    <!-- Cart Icon -->
+    <div class="cart-container">
+        <i class="fas fa-shopping-cart cart-icon" onclick="toggleCart()"></i>
+        <span class="cart-count">0</span>
+    </div>
+</div>
+
+    <!-- About Section -->
+    <div class="about-section">
+        <div class="about-content">
+            <h1>About NEXIRA</h1>
+            <div class="about-text">
+                <p>Welcome to NEXIRA, where streetwear meets self-expression. We're revolutionizing the way you think about custom clothing, offering a unique platform where you can create your own personalized streetwear pieces.</p>
+                
+                <p>Our mission is simple: to give you the power to wear your creativity. Every NEXIRA piece is a blank canvas waiting for your personal touch, allowing you to design clothing that truly represents who you are.</p>
+                
+                <p>Based in the UK, we combine quality materials with cutting-edge customization technology to deliver streetwear that's uniquely yours. Whether you're into bold statements or subtle sophistication, NEXIRA gives you the freedom to bring your vision to life.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="https://www.instagram.com/nexiraclothing/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.tiktok.com/@nexiraclothing?lang=en" target="_blank" class="social-link">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+                <a href="mailto:Nexiraclothing@gmail.com" class="social-link">
+                    <i class="far fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 NEXIRA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add JavaScript at the bottom of the body -->
+    <script src="script.js"></script>
+</body>
+</html>

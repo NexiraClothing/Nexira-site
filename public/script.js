@@ -272,3 +272,19 @@ document.addEventListener('mousedown', function(event) {
     }
 });
 
+function toggleMenu() {
+    const menuContent = document.querySelector('.menu-content');
+    menuContent.classList.toggle('active');
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.querySelector('.hamburger-menu');
+    const menuContent = document.querySelector('.menu-content');
+    
+    if (!menu.contains(event.target) && menuContent.classList.contains('active')) {
+        menuContent.classList.remove('active');
+    }
+});
+
+
