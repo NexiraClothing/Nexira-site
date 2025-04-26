@@ -39,8 +39,8 @@ app.post('/create-checkout-session', async (req, res) => {
             payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
-            allow_promotion_codes: true, // Make sure this is enabled
-            success_url: 'https://nexira-site.onrender.com?success=true',
+            allow_promotion_codes: true,
+            success_url: 'https://nexira-site.onrender.com/success.html?session_id={CHECKOUT_SESSION_ID}',
             cancel_url: 'https://nexira-site.onrender.com?canceled=true',
             shipping_address_collection: {
                 allowed_countries: ['GB']
@@ -86,10 +86,17 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something broke!' });
+// Verify session endpoint
+app.get('/verify-session', async (req, res) => {
+    try {
+        const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+        res.json({
+            status: session.payment_status,
+            customer_email: session.customer_details.email
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 // Add this new endpoint to create a free shipping coupon
@@ -121,8 +128,25 @@ app.post('/create-free-shipping-coupon', async (req, res) => {
     }
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: 'Something broke!' });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+app.get('/verify-session', async (req, res) => {
+    try {
+        const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+        res.json({
+            status: session.payment_status,
+            customer_email: session.customer_details.email
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
