@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.stripe.com; script-src 'self' https://js.stripe.com; frame-src https://js.stripe.com;">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self' https://api.stripe.com; 
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com https://maxcdn.bootstrapcdn.com https://ajax.googleapis.com; 
+    frame-src https://js.stripe.com; 
+    style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com; 
+    font-src 'self' https://cdnjs.cloudflare.com;
+    img-src 'self' data: https:;
+">
     <title>Nexira</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -38,7 +45,6 @@
             <video class="logo" autoplay muted loop playsinline>
                 <source src="Nexira-Images/Nexira-animation.mp4" type="video/mp4">
             </video>
-        </a>
         
         <!-- Cart Icon -->
         <div class="cart-container">
@@ -124,15 +130,11 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
 
 
 
 
-
-<!-- FOOTER -->
+    <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-social">
@@ -154,3 +156,8 @@
         </div>
     </div>
 </footer>
+
+<script src="script.js"></script>
+</body>
+
+</html>
