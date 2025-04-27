@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <script type="module" src="main.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.stripe.com; script-src 'self' https://js.stripe.com; frame-src https://js.stripe.com;">
     <title>Nexira</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -15,6 +19,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="menu-content">
+                <a href="index.html">Home</a>
                 <div class="dropdown-item">
                     <a href="#" class="main-link">Catalog <i class="fas fa-chevron-right"></i></a>
                     <div class="submenu">
@@ -30,10 +35,11 @@
         </div>
     
         <!-- Centered Logo -->
-        <video class="logo" autoplay muted loop playsinline>
-            <source src="Nexira-Images/Nexira-animation.mp4" type="video/mp4">
-        </video>
-    
+            <video class="logo" autoplay muted loop playsinline>
+                <source src="Nexira-Images/Nexira-animation.mp4" type="video/mp4">
+            </video>
+        </a>
+        
         <!-- Cart Icon -->
         <div class="cart-container">
             <i class="fas fa-shopping-cart cart-icon" onclick="toggleCart()"></i>
@@ -41,19 +47,18 @@
         </div>
     </div>
     
-        <!-- Cart Modal -->
-        <div id="cartModal" class="cart-modal">
-            <div class="cart-modal-content">
-                <h3>Your Cart</h3>
-                <div id="cartItems">
-                    <!-- Cart items will be inserted here -->
-                </div>
-                <div id="cartTotal">Total: $0.00</div>
-                <button id="checkoutBtn" onclick="checkout()">Checkout</button>
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <h3>Your Cart</h3>
+            <div id="cartItems">
+                <!-- Cart items will be inserted here -->
             </div>
+            <div id="cartTotal">Total: $0.00</div>
+            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
         </div>
     </div>
-
+    
     <!-- PRODUCT SECTION -->
     <div class="product-container">
         <div class="product-card">

@@ -287,4 +287,13 @@ document.addEventListener('click', function(event) {
     }
 });
 
+// security.js
+export const securityManager = new SecurityManager();
+
+// session.js
+export const sessionManager = new SessionManager();
+
+// logger.js
+export const logger = new Logger();
+
 
