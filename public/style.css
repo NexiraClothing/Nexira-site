@@ -362,10 +362,8 @@ button[onclick*="addProductToCart"] {
 }
 
 .logo {
-  order: 2;
-  flex: 0 1 auto;
-  height: 60px; /* Adjust as needed for your video logo */
-  margin: 0 auto;
+  height: 60px;
+  margin: 0;
 }
 
 .logo-text {
@@ -1220,7 +1218,6 @@ button[onclick*="addProductToCart"] {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1002;
-    display: none; /* Will be shown via JavaScript */
   }
 
   /* Modal customization */
@@ -1306,21 +1303,26 @@ button[onclick*="addProductToCart"] {
 
   .hamburger-menu {
     position: relative;
-    order: 1;
     flex: 0 0 auto;
     margin: 0;
   }
-    /* Overlay styling */
-    #overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1001;
-    }
+
+  .cart-container {
+    position: relative;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+  }
 }
 
 
