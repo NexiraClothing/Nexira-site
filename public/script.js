@@ -118,9 +118,10 @@ const PRODUCT_TYPES = {
 function toggleMenu() {
     const menuContent = document.querySelector('.menu-content');
     if (menuContent) {
-        menuContent.classList.toggle('show');
+        menuContent.style.display = menuContent.style.display === 'block' ? 'none' : 'block';
     }
 }
+
 
 // ===============================
 // MODAL FUNCTIONS
@@ -425,7 +426,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize cart
     updateCartCount();
     updateCartDisplay();
-    initCartPreview();
     initScrollAnimation();
 
     // Color button handlers for catalog
@@ -701,3 +701,55 @@ function expandProductCard(element) {
         details.style.visibility = 'visible';
     }
 }
+
+    // Detect if device supports touch
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    
+    dropdownItems.forEach(item => {
+        const mainLink = item.querySelector('.main-link');
+        const arrow = item.querySelector('.fas.fa-chevron-right');
+        const submenu = item.querySelector('.submenu');
+        
+        if (isTouchDevice) {
+            // For touch devices: prevent main link from triggering on first touch
+            mainLink.addEventListener('click', function(e) {
+                if (!submenu.classList.contains('active')) {
+                    e.preventDefault();
+                }
+            });
+            
+            // Make arrow clickable on touch devices
+            arrow.style.padding = '10px'; // Make touch target bigger
+            arrow.style.cursor = 'pointer';
+            
+            arrow.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Close other submenus
+                dropdownItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherSubmenu = otherItem.querySelector('.submenu');
+                        const otherArrow = otherItem.querySelector('.fas.fa-chevron-right');
+                        otherSubmenu.classList.remove('active');
+                        otherArrow.style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Toggle current submenu
+                submenu.classList.toggle('active');
+                arrow.style.transform = submenu.classList.contains('active') ? 'rotate(90deg)' : 'rotate(0deg)';
+            });
+        } else {
+            // For desktop: show submenu on hover
+            item.addEventListener('mouseenter', () => {
+                submenu.classList.add('active');
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                submenu.classList.remove('active');
+            });
+        }
+    });

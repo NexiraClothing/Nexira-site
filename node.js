@@ -5,6 +5,13 @@ const app = express();
 
 app.use(express.json());
 
+// Add security headers
+app.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'DENY');
+    next();
+});
+
+
 app.post('/create-checkout-session', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({

@@ -402,7 +402,7 @@ button[onclick*="addProductToCart"] {
   right: -160px;
   left: auto;
   background-color: rgba(255, 255, 255, 0.95);
-  min-width: 80px;
+  min-width: 200px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   border: 2px solid #000000;
   border-radius: 15px;
@@ -429,6 +429,7 @@ button[onclick*="addProductToCart"] {
 /* === 9. DROPDOWN STYLES === */
 .dropdown-item {
   position: relative;
+  width: 100%;
 }
 
 .dropdown-item .main-link {
@@ -462,6 +463,36 @@ button[onclick*="addProductToCart"] {
 
 .submenu a:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+}
+
+.main-link {
+  display: inline-flex; /* Change to inline-flex */
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  color: #000000;
+  text-decoration: none;
+}
+
+
+.fas.fa-chevron-right {
+  position: absolute;
+  right: 8px;
+  top: calc(50% - 18px); /* Half of the height */
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
 }
 
 /* === 10. CART ICON STYLES === */
@@ -1201,11 +1232,13 @@ button[onclick*="addProductToCart"] {
   /* Hero section */
   .hero-background {
       background-size: 90% auto;
-      margin-top: -20px;
+      margin-top: -30px;
+      margin-bottom: -120px;
   }
 
   .hero-section {
-    margin-top: -20px; /* Adjust this value as needed */
+    margin-top: -30px; /* Adjust this value as needed */
+    margin-bottom: -120px;
   }
 
 
@@ -1218,13 +1251,13 @@ button[onclick*="addProductToCart"] {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100px;
+    width: 100px; /* Set specific width */
     background-color: rgba(255, 255, 255, 0.95);
     border: 2px solid #000000;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1002;
-  }
+}
 
   /* Adjust the menu items to fit the thinner width */
   .menu-content a {
@@ -1272,30 +1305,47 @@ button[onclick*="addProductToCart"] {
 
   .main-link {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     padding: 8px 12px;
-  }
+    position: relative;
+    padding-right: 36px;
+}
 
   .submenu.active {
     display: block;
   }
-
 
   .submenu {
     display: none;
     position: absolute;
     left: 100%;
     top: 0;
+    width: 100px; /* Match the width of menu-content */
     background-color: rgba(255, 255, 255, 0.95);
     border: 2px solid #000000;
     border-radius: 8px;
-    width: 100px;
-  }
+    }
 
-  .dropdown-item .submenu a {
-    padding: 8px 12px;
-    font-size: 14px;
+    /* Make submenu narrower with higher specificity */
+    .dropdown-item .submenu,
+    .menu-content .submenu {
+        width: 60px !important;
+        min-width: 60px;
+    }
+
+    /* Ensure submenu links fit the narrower width */
+    .dropdown-item .submenu a {
+        width: 100%;
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+
+
+  .submenu a {
+  width: 100%;
+  box-sizing: border-box;
   }
 
   .dropdown-item .submenu.active {
@@ -1405,7 +1455,90 @@ button[onclick*="addProductToCart"] {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1001;
   }
-}
+    /* Target both the menu and submenu with high specificity */
+    .navbar .menu-content,
+    .navbar .menu-content .submenu,
+    .navbar .dropdown-item .submenu {
+        width: 120px !important;
+        min-width: 12% !important;
+        max-width: 120px !important;
+    }
+
+    /* Adjust the text inside to fit */
+    .menu-content a,
+    .submenu a,
+    .dropdown-item a {
+        padding: 8px 4px !important;
+        font-size: 12px !important;
+        white-space: normal !important;
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    .submenu.active ~ .fas.fa-chevron-right,
+    .fas.fa-chevron-right.active {
+        transform: translateY(-50%) rotate(90deg) !important;
+        transform-origin: center center;
+    }
+
+    /* Ensure the submenu position is correct */
+    .submenu {
+        left: 120px !important; /* Match the new width */
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      /* Styles for touch devices */
+      .fas.fa-chevron-right {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+      
+      .submenu {
+          display: none;
+      }
+      
+      .submenu.active {
+          display: block;
+      }
+
+      .main-link-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .dropdown-item {
+      position: relative;
+  }
+  }
+  
+
+      /* Styles for desktop devices */
+      .dropdown-item:hover .submenu {
+          display: block;
+      }
+      
+      .fas.fa-chevron-right {
+        position: absolute;
+        right: 8px;
+        top: calc(50% - 18px);
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+        /* Active state */
+        .submenu.active ~ .fas.fa-chevron-right {
+          transform: rotate(90deg);
+      }
+
+    }
+  
+
 
 
 /* Touch device optimizations */
