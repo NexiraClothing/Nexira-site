@@ -380,68 +380,6 @@ function updateCartDisplay() {
 // ===============================
 // CART PREVIEW FUNCTIONS
 // ===============================
-function initCartPreview() {
-    const cartIcon = document.querySelector('.cart-icon-container');
-    const cartPreview = document.querySelector('.cart-preview');
-    let timeout;
-
-    cartIcon.addEventListener('mouseenter', () => {
-        clearTimeout(timeout);
-        updateCartPreview();
-        cartPreview.classList.add('show');
-    });
-
-    cartIcon.addEventListener('mouseleave', () => {
-        timeout = setTimeout(() => {
-            cartPreview.classList.remove('show');
-        }, 300);
-    });
-
-    cartPreview.addEventListener('mouseenter', () => {
-        clearTimeout(timeout);
-    });
-
-    cartPreview.addEventListener('mouseleave', () => {
-        timeout = setTimeout(() => {
-            cartPreview.classList.remove('show');
-        }, 300);
-    });
-}
-
-function updateCartPreview() {
-    const cartPreviewItems = document.querySelector('.cart-preview-items');
-    const cartPreviewTotal = document.querySelector('.cart-preview-total');
-    const items = JSON.parse(localStorage.getItem('cartItems')) || [];
-    
-    cartPreviewItems.innerHTML = '';
-    let total = 0;
-
-    items.slice(0, 3).forEach(item => {
-        const itemElement = document.createElement('div');
-        itemElement.className = 'cart-preview-item';
-        
-        itemElement.innerHTML = `
-            <img src="${item.image}" alt="Product">
-            <div class="cart-preview-item-details">
-                <div>${item.shirtColor} ${item.threadColor ? `/ ${item.threadColor}` : ''}</div>
-                <div>Size: ${item.size.toUpperCase()}</div>
-                <div>Qty: ${item.quantity} × £${item.price}</div>
-            </div>
-        `;
-        
-        cartPreviewItems.appendChild(itemElement);
-        total += item.price * item.quantity;
-    });
-
-    if (items.length > 3) {
-        const moreItems = document.createElement('div');
-        moreItems.className = 'cart-preview-more';
-        moreItems.textContent = `+ ${items.length - 3} more items`;
-        cartPreviewItems.appendChild(moreItems);
-    }
-
-    cartPreviewTotal.textContent = `Total: £${total.toFixed(2)}`;
-}
 
 function removeFromCart(index) {
     cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -683,6 +621,55 @@ document.addEventListener('DOMContentLoaded', function() {
             closeCartModal();
         }
     });
+});
+const submenuToggles = document.querySelectorAll('.submenu-toggle');
+
+submenuToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Get the parent dropdown-item and its submenu
+        const dropdownItem = this.closest('.dropdown-item');
+        const submenu = dropdownItem.querySelector('.submenu');
+
+        // Close all other submenus first
+        document.querySelectorAll('.submenu').forEach(menu => {
+            if (menu !== submenu) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Reset all other arrows
+        document.querySelectorAll('.submenu-toggle').forEach(arrow => {
+            if (arrow !== this) {
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        });
+
+        // Toggle the clicked submenu
+        submenu.classList.toggle('active');
+
+        // Rotate the arrow
+        this.style.transform = submenu.classList.contains('active') 
+            ? 'rotate(90deg)' 
+            : 'rotate(0deg)';
+    });
+});
+
+// Close submenus when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown-item')) {
+        // Close all submenus
+        document.querySelectorAll('.submenu').forEach(submenu => {
+            submenu.classList.remove('active');
+        });
+        
+        // Reset all arrows
+        document.querySelectorAll('.submenu-toggle').forEach(arrow => {
+            arrow.style.transform = 'rotate(0deg)';
+        });
+    }
 });
 
     // Add click handlers for product containers
