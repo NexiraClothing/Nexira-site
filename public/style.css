@@ -1236,16 +1236,36 @@ button[onclick*="addProductToCart"] {
 }
 
 @media (max-width: 480px) {
+  /* Previous mobile styles remain the same */
   .hero-background {
-      background-size: 90% auto;  /* Increase from 50% to 90% on mobile */
+      background-size: 90% auto;
   }
 
+  /* Modal customization fixes */
+  .modal {
+      padding: 1rem;
+      width: 95%;
+      max-height: 80vh;
+      overflow-y: auto;
+  }
 
-  /* Fix 2: Center alignment for colors, threads, and sizes */
-  .color-options h4 {
+  .modal-content {
+      flex-direction: column;
+      padding-bottom: 20px;
+  }
+
+  /* Color and size selection centering */
+  .color-options {
+      width: 100%;
+  }
+
+  .color-options h4,
+  .thread-options h4,
+  .size-selection h4 {
       text-align: center;
       margin-bottom: 10px;
       color: #333;
+      font-size: 16px;
   }
 
   .color-squares, 
@@ -1256,38 +1276,59 @@ button[onclick*="addProductToCart"] {
       gap: 10px;
       margin: 15px 0;
       flex-wrap: wrap;
+      width: 100%;
   }
 
+  /* Size selection centering */
   .size-selection {
       text-align: center;
+      width: 100%;
+      margin: 15px 0;
   }
 
-  .size-selection h4 {
-      margin-bottom: 10px;
-      color: #333;
-  }
-
-  /* Fix 3: Hamburger menu positioning */
+  /* Hamburger menu positioning fix */
   .menu-content {
-      right: -20px; /* Change from -160px */
+      right: 0;
       left: auto;
       width: 200px;
+      position: absolute;
+      top: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 2px solid #000000;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  /* Fix 4: Modal adjustments for mobile */
-  .modal {
-      padding: 1rem;
-      width: 95%;
-      max-height: 80vh;
-  }
-
-  .modal .add-to-cart-button {
+  /* Existing add-to-cart button mobile styles */
+  .add-to-cart-button {
       width: 100%;
-      padding: 12px 20px;
-      margin-top: 15px;
-      font-size: 16px; /* Better touch target */
+      padding: 15px;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+      display: block;
+  }
+
+  .add-to-cart-button:hover {
+      background: #333333;
+  }
+
+  /* Ensure modal image fits properly */
+  #modalImage {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
   }
 }
+
 
 /* === 19. ADDITIONAL RESPONSIVE ADJUSTMENTS === */
 @media (max-width: 968px) {
