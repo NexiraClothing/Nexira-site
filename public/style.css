@@ -1040,6 +1040,23 @@ button[onclick*="addProductToCart"] {
   background: #333;
   transform: translateY(-2px);
 }
+
+.modal button[onclick*="addProductToCart"] {
+  height: auto;
+  opacity: 1;
+  visibility: visible;
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  margin: 20px auto;
+  transition: all 0.3s ease;
+}
+
 /* === 16. FOOTER STYLES === */
 .footer {
   flex-shrink: 0;
@@ -1112,6 +1129,14 @@ button[onclick*="addProductToCart"] {
 }
 
 /* === 18. MEDIA QUERIES === */
+/* Larger tablets and smaller desktops */
+@media (max-width: 968px) {
+  .product-card {
+      max-width: calc(50% - 20px);
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .hero-content h1 {
       font-size: 2rem;
@@ -1154,94 +1179,43 @@ button[onclick*="addProductToCart"] {
   .footer-social {
       flex-wrap: wrap;
   }
-
-  .product-card {
-      max-width: calc(50% - 20px);
-  }
 }
 
+/* Mobile devices */
 @media (max-width: 480px) {
+  /* Navbar adjustments */
   .navbar {
+      height: 80px;
       padding: 1rem;
+  }
+
+  .logo-text {
+      font-size: 1.8rem;
+  }
+
+  /* Hero section */
+  .hero-background {
+      background-size: 90% auto;
   }
 
   .hero-content h1 {
       font-size: 1.5rem;
   }
 
-  .product-info {
-      padding: 2rem 1rem;
-  }
-
-  .details-section {
-      padding: 2rem 1rem;
-  }
-
-  .modal {
-      padding: 1rem;
-  }
-
-  .colors, .threads, .sizes {
-      justify-content: center;
-  }
-
-  .product-card {
-      max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Navbar adjustments */
-  .navbar {
-      height: 80px; /* Smaller header on mobile */
-  }
-
-  .logo-text {
-      font-size: 1.8rem; /* Smaller logo text */
-  }
-
-  /* Cart modal positioning */
-  #cartModal {
-      top: 60px;
-      right: 10px;
-      left: 10px;
-      width: auto;
-      max-width: none;
-  }
-
-  /* Product card adjustments */
-  .product-card.expanded .product-container {
-      margin: 0 -10px; /* Smaller margin on mobile */
-  }
-
-  /* Size buttons */
-  .size-button {
-      padding: 8px 15px; /* Slightly smaller padding */
-      font-size: 14px;
-  }
-
-  /* Cart popup */
-  .cart-popup {
-      left: 20px;
-      right: 20px;
-      width: auto;
-      text-align: center;
-  }
-
-  /* Menu content positioning */
+  /* Menu/Navigation */
   .menu-content {
-      right: -20px; /* Adjust dropdown position */
+      right: 0;
+      left: auto;
       width: 200px;
+      position: absolute;
+      top: 100%;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 2px solid #000000;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-}
 
-@media (max-width: 480px) {
-  /* Previous mobile styles remain the same */
-  .hero-background {
-      background-size: 90% auto;
-  }
-
-  /* Modal customization fixes */
+  /* Modal customization */
   .modal {
       padding: 1rem;
       width: 95%;
@@ -1279,82 +1253,57 @@ button[onclick*="addProductToCart"] {
       width: 100%;
   }
 
-  /* Size selection centering */
+  /* Size selection */
   .size-selection {
       text-align: center;
       width: 100%;
       margin: 15px 0;
   }
 
-  /* Hamburger menu positioning fix */
-  .menu-content {
-      right: 0;
-      left: auto;
-      width: 200px;
-      position: absolute;
-      top: 100%;
-      background-color: rgba(255, 255, 255, 0.95);
-      border: 2px solid #000000;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  .size-button {
+      padding: 8px 15px;
+      font-size: 14px;
   }
 
-  /* Existing add-to-cart button mobile styles */
-  .add-to-cart-button {
-      width: 100%;
-      padding: 15px;
-      background: #000000;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      font-family: 'Montserrat', sans-serif;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-      display: block;
+  /* Cart related */
+  #cartModal {
+      top: 60px;
+      right: 10px;
+      left: 10px;
+      width: auto;
+      max-width: none;
   }
 
-  .add-to-cart-button:hover {
-      background: #333333;
+  .cart-popup {
+      left: 20px;
+      right: 20px;
+      width: auto;
+      text-align: center;
   }
 
-  /* Ensure modal image fits properly */
-  #modalImage {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      margin: 0 auto;
-      display: block;
-  }
-}
-
-
-/* === 19. ADDITIONAL RESPONSIVE ADJUSTMENTS === */
-@media (max-width: 968px) {
-  .product-card {
-      max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 580px) {
+  /* Product cards */
   .product-card {
       max-width: 100%;
   }
-  
-  .arrow {
-      padding: 8px 12px;
+
+  .product-card.expanded .product-container {
+      margin: 0 -10px;
+  }
+
+  /* Sections padding */
+  .product-info,
+  .details-section {
+      padding: 2rem 1rem;
   }
 }
 
-/* === 20. TOUCH DEVICE OPTIMIZATION === */
-
+/* Touch device optimizations */
 @media (hover: none) {
   .product-card:hover {
-      transform: none; /* Remove hover effects on touch devices */
+      transform: none;
   }
   
   button:hover {
-      transform: none; /* Remove button hover effects */
+      transform: none;
   }
 }
