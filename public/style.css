@@ -1211,7 +1211,7 @@ button[onclick*="addProductToCart"] {
   .menu-content {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: -50px; /* This will move the dropdown menu to the right */
     width: 200px;
     background-color: rgba(255, 255, 255, 0.95);
     border: 2px solid #000000;
@@ -1302,7 +1302,6 @@ button[onclick*="addProductToCart"] {
   }
 
   .hamburger-menu {
-    position: relative;
     margin-left: auto; /* Push to right side */
   }
 
