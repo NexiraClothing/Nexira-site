@@ -1239,7 +1239,7 @@ button[onclick*="addProductToCart"] {
   .hero-background {
       background-size: 90% auto;  /* Increase from 50% to 90% on mobile */
   }
-}
+
 
   /* Fix 2: Center alignment for colors, threads, and sizes */
   .color-options h4 {
@@ -1287,6 +1287,7 @@ button[onclick*="addProductToCart"] {
       margin-top: 15px;
       font-size: 16px; /* Better touch target */
   }
+}
 
 /* === 19. ADDITIONAL RESPONSIVE ADJUSTMENTS === */
 @media (max-width: 968px) {
