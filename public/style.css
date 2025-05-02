@@ -368,17 +368,11 @@ button[onclick*="addProductToCart"] {
 }
 
 .logo-text {
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: white;
-  letter-spacing: 4px;
-  text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  order: 2;
-  margin: 0;
+  font-size: 1.8rem;
+  order: 2; /* Second item */
+  flex: 0 1 auto; /* Can shrink if needed */
+  text-align: center;
+  margin: 0; /* Reset margins */
 }
 
 /* === 8. MENU STYLES === */
@@ -473,8 +467,10 @@ button[onclick*="addProductToCart"] {
 
 /* === 10. CART ICON STYLES === */
 .cart-container {
+  position: relative;
   order: 3; /* Third item */
-  margin-left: auto;
+  flex: 0 0 auto; /* Don't grow or shrink */
+  margin: 0; /* Reset margins */
 }
 
 .cart-icon {
@@ -1190,9 +1186,10 @@ button[onclick*="addProductToCart"] {
     height: 80px;
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distributes space between items */
     align-items: center;
-}
+    width: 100%; /* Ensure navbar spans full width */
+  }
 
   .logo-text {
       font-size: 1.8rem;
@@ -1211,14 +1208,14 @@ button[onclick*="addProductToCart"] {
   .menu-content {
     position: absolute;
     top: 100%;
-    left: 0; /* Changed from right: -200px to left: 0 */
+    left: 0;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.95);
     border: 2px solid #000000;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1002;
-}
+  }
 
   /* Modal customization */
   .modal {
@@ -1303,9 +1300,10 @@ button[onclick*="addProductToCart"] {
 
   .hamburger-menu {
     position: relative;
-    margin-left: 0;
     order: 1; /* First item */
-}
+    margin: 0; /* Reset any margins */
+    flex: 0 0 auto; /* Don't grow or shrink */
+  }
 }
 
 
