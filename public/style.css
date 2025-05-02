@@ -1185,14 +1185,9 @@ button[onclick*="addProductToCart"] {
 @media (max-width: 480px) {
   /* Navbar adjustments */
   .navbar {
-    height: 80px;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+      height: 80px;
+      padding: 1rem;
   }
-
 
   .logo-text {
       font-size: 1.8rem;
@@ -1208,17 +1203,17 @@ button[onclick*="addProductToCart"] {
   }
 
   /* Menu/Navigation */
-  .menu-content {
-    position: absolute;
-    top: 100%;
-    right: -50px; /* This will move the dropdown menu to the right */
-    width: 200px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 2px solid #000000;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1002;
-}
+    .menu-content {
+        position: absolute;
+        top: 100%;
+        right: -200px;
+        width: 200px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border: 2px solid #000000;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1002;
+    }
 
   /* Modal customization */
   .modal {
@@ -1302,13 +1297,9 @@ button[onclick*="addProductToCart"] {
   }
 
   .hamburger-menu {
+    position: relative;
     margin-left: auto; /* Push to right side */
-  }
-
-  .menu-content.show {
-    display: block;
-  }
-
+}
 }
 
 /* Touch device optimizations */
