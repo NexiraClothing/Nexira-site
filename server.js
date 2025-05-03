@@ -59,21 +59,30 @@ app.use(express.static('public'));
 // Create checkout session endpoint
 app.post('/create-checkout-session', async (req, res) => {
     try {
+        // Log the received request body
+        console.log('Received checkout request:', req.body);
+
         if (!req.body.items || !Array.isArray(req.body.items)) {
-            return res.status(400).json({ error: 'Invalid request body' });
+            console.log('Invalid request body structure:', req.body);
+            return res.status(400).json({ error: 'Invalid request body - items array required' });
         }
 
-        const lineItems = req.body.items.map(item => ({
-            price_data: {
-                currency: 'gbp',
-                product_data: {
-                    name: `T-Shirt (${item.size}) - ${item.shirtColor} with ${item.threadColor} embroidery`,
-                    description: 'Custom Embroidered T-Shirt'
+        const lineItems = req.body.items.map(item => {
+            console.log('Processing item:', item);
+            return {
+                price_data: {
+                    currency: 'gbp',
+                    product_data: {
+                        name: `${item.productName || 'Product'} (${item.size}) - ${item.shirtColor}`,
+                        description: `Size: ${item.size}`
+                    },
+                    unit_amount: Math.round(parseFloat(item.price) * 100),
                 },
-                unit_amount: Math.round(item.price * 100),
-            },
-            quantity: item.quantity || 1,
-        }));
+                quantity: item.quantity || 1,
+            };
+        });
+
+        console.log('Created line items:', lineItems);
 
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
@@ -109,10 +118,15 @@ app.post('/create-checkout-session', async (req, res) => {
             ]
         });
         
+        console.log('Stripe session created:', session);
         res.json({ url: session.url });
+        
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: error.message });
+        console.error('Detailed error in checkout:', error);
+        res.status(500).json({ 
+            error: error.message,
+            details: error.stack
+        });
     }
 });
 

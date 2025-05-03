@@ -405,6 +405,9 @@ async function checkout() {
             return;
         }
 
+        // Log cart items for debugging
+        console.log('Cart items:', cartItems);
+
         // Disable checkout button to prevent double-clicks
         const checkoutBtn = document.getElementById('checkoutBtn');
         if (checkoutBtn) {
@@ -412,7 +415,18 @@ async function checkout() {
             checkoutBtn.textContent = 'Processing...';
         }
 
-        const requestOptions = {
+        // Format items for the server
+        const formattedItems = cartItems.map(item => ({
+            productName: item.productName || 'Product',
+            size: item.size,
+            shirtColor: item.shirtColor,
+            price: parseFloat(item.price),
+            quantity: item.quantity || 1
+        }));
+
+        console.log('Formatted items:', formattedItems);
+
+        const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -420,31 +434,22 @@ async function checkout() {
             },
             mode: 'cors',
             body: JSON.stringify({
-                items: cartItems.map(item => ({
-                    ...item,
-                    price: parseFloat(item.price)
-                }))
+                items: formattedItems
             })
-        };
+        });
 
-        console.log('Sending request with options:', requestOptions);
-        console.log('To URL:', 'https://nexira-site.onrender.com/create-checkout-session');
-
-        const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', requestOptions);
+        console.log('Response status:', response.status);
+        const responseData = await response.json();
+        console.log('Response data:', responseData);
 
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Server response:', errorText);
-            throw new Error(`Server error: ${errorText}`);
+            throw new Error(responseData.error || 'Server error');
         }
 
-        const session = await response.json();
-        console.log('Received session:', session);
-
-        if (session.url) {
-            window.location.href = session.url;
+        if (responseData.url) {
+            window.location.href = responseData.url;
         } else {
-            throw new Error('No checkout URL received from server');
+            throw new Error('No checkout URL received');
         }
 
     } catch (error) {
@@ -459,6 +464,7 @@ async function checkout() {
         }
     }
 }
+
 
 
 // Create a function for the scroll animation
@@ -605,7 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
             button.style.cursor = 'pointer'; // Make it obvious they're clickable
             button.onclick = function() {
                 console.log('Thread button clicked');
-                alert('Thread button clicked: ' + this.getAttribute('data-thread'));
                 currentThreadColor = this.getAttribute('data-thread');
                 threadButtons.forEach(b => b.classList.remove('selected'));
                 this.classList.add('selected');
