@@ -406,9 +406,9 @@ async function checkout() {
         }
 
         // Log cart items for debugging
-        console.log('Cart items:', cartItems);
+        console.log('Cart items being sent:', cartItems);
 
-        // Disable checkout button to prevent double-clicks
+        // Disable checkout button
         const checkoutBtn = document.getElementById('checkoutBtn');
         if (checkoutBtn) {
             checkoutBtn.disabled = true;
@@ -417,9 +417,10 @@ async function checkout() {
 
         // Format items for the server
         const formattedItems = cartItems.map(item => ({
-            productName: item.productName || 'Product',
+            productName: item.productName,
             size: item.size,
             shirtColor: item.shirtColor,
+            threadColor: item.threadColor,
             price: parseFloat(item.price),
             quantity: item.quantity || 1
         }));
@@ -453,10 +454,14 @@ async function checkout() {
         }
 
     } catch (error) {
-        console.error('Checkout error details:', error);
-        alert(`Checkout error: ${error.message}`);
+        console.error('Checkout error details:', {
+            message: error.message,
+            stack: error.stack
+        });
         
-        // Re-enable checkout button if there's an error
+        alert(`Checkout error: ${error.message}. Please try again or contact support.`);
+        
+        // Re-enable checkout button
         const checkoutBtn = document.getElementById('checkoutBtn');
         if (checkoutBtn) {
             checkoutBtn.disabled = false;
@@ -464,7 +469,6 @@ async function checkout() {
         }
     }
 }
-
 
 
 // Create a function for the scroll animation
