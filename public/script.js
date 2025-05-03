@@ -412,32 +412,44 @@ async function checkout() {
             checkoutBtn.textContent = 'Processing...';
         }
 
-        // Call your backend to create a Stripe checkout session
-        const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', {
+        const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
+            mode: 'cors',
             body: JSON.stringify({
                 items: cartItems.map(item => ({
                     ...item,
                     price: parseFloat(item.price)
                 }))
             })
-        });
+        };
+
+        console.log('Sending request with options:', requestOptions);
+        console.log('To URL:', 'https://nexira-site.onrender.com/create-checkout-session');
+
+        const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', requestOptions);
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            const errorText = await response.text();
+            console.error('Server response:', errorText);
+            throw new Error(`Server error: ${errorText}`);
         }
 
         const session = await response.json();
+        console.log('Received session:', session);
 
-        // Redirect to Stripe checkout
-        window.location.href = session.url;
+        if (session.url) {
+            window.location.href = session.url;
+        } else {
+            throw new Error('No checkout URL received from server');
+        }
 
     } catch (error) {
-        console.error('Error during checkout:', error);
-        alert('There was a problem processing your checkout. Please try again.');
+        console.error('Checkout error details:', error);
+        alert(`Checkout error: ${error.message}`);
         
         // Re-enable checkout button if there's an error
         const checkoutBtn = document.getElementById('checkoutBtn');
@@ -447,7 +459,6 @@ async function checkout() {
         }
     }
 }
-
 
 
 // Create a function for the scroll animation

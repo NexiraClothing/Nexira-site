@@ -7,11 +7,51 @@ const path = require('path');
 const app = express();
 
 // Middleware
-app.use(express.json());
-app.use(cors({
-    origin: ['https://nexira-site.onrender.com', 'http://localhost:3000'],
+const corsOptions = {
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'https://nexira-site.onrender.com',
+            'http://127.0.0.1:5500',
+            'http://localhost:3000'
+        ];
+        
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Accept', 'Origin'],
     credentials: true
-}));
+};
+
+// CORS Preflight middleware
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    
+    // Handle preflight
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+    
+    next();
+});
+
+app.use(express.json());
+app.use(cors(corsOptions));
+
+// Add preflight handler
+app.options('*', cors(corsOptions));
+
+// Rest of your routes and middleware remain the same...
 
 // Serve static files
 app.use(express.static('public'));
