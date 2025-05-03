@@ -396,6 +396,39 @@ function removeFromCart(index) {
     updateCartCount();
 }
 
+function checkout() {
+    // Get cart items
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    
+    if (cartItems.length === 0) {
+        alert('Your cart is empty');
+        return;
+    }
+
+    // Calculate total
+    const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    // Create order summary
+    const orderSummary = cartItems.map(item => {
+        return `${item.productName} (${item.shirtColor}) - Size: ${item.size.toUpperCase()} - Quantity: ${item.quantity}`;
+    }).join('\n');
+
+    // Show order confirmation
+    const confirmMessage = `Order Summary:\n\n${orderSummary}\n\nTotal: £${total.toFixed(2)}\n\nProceed to checkout?`;
+    
+    if (confirm(confirmMessage)) {
+        // Here you would typically redirect to your payment processing page
+        alert('This is where you would be redirected to the payment gateway.\nFor now, this is just a demonstration.');
+        
+        // Clear cart after successful order
+        localStorage.removeItem('cartItems');
+        cartItems = [];
+        updateCartDisplay();
+        updateCartCount();
+        closeCartModal();
+    }
+}
+
 // Create a function for the scroll animation
 function initScrollAnimation() {
     const productSection = document.getElementById('productInfo1');
