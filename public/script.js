@@ -396,38 +396,59 @@ function removeFromCart(index) {
     updateCartCount();
 }
 
-function checkout() {
-    // Get cart items
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    
-    if (cartItems.length === 0) {
-        alert('Your cart is empty');
-        return;
-    }
-
-    // Calculate total
-    const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    // Create order summary
-    const orderSummary = cartItems.map(item => {
-        return `${item.productName} (${item.shirtColor}) - Size: ${item.size.toUpperCase()} - Quantity: ${item.quantity}`;
-    }).join('\n');
-
-    // Show order confirmation
-    const confirmMessage = `Order Summary:\n\n${orderSummary}\n\nTotal: £${total.toFixed(2)}\n\nProceed to checkout?`;
-    
-    if (confirm(confirmMessage)) {
-        // Here you would typically redirect to your payment processing page
-        alert('This is where you would be redirected to the payment gateway.\nFor now, this is just a demonstration.');
+async function checkout() {
+    try {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         
-        // Clear cart after successful order
-        localStorage.removeItem('cartItems');
-        cartItems = [];
-        updateCartDisplay();
-        updateCartCount();
-        closeCartModal();
+        if (cartItems.length === 0) {
+            alert('Your cart is empty');
+            return;
+        }
+
+        // Disable checkout button to prevent double-clicks
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        if (checkoutBtn) {
+            checkoutBtn.disabled = true;
+            checkoutBtn.textContent = 'Processing...';
+        }
+
+        // Call your backend to create a Stripe checkout session
+        const response = await fetch('https://nexira-site.onrender.com/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                items: cartItems.map(item => ({
+                    ...item,
+                    price: parseFloat(item.price)
+                }))
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const session = await response.json();
+
+        // Redirect to Stripe checkout
+        window.location.href = session.url;
+
+    } catch (error) {
+        console.error('Error during checkout:', error);
+        alert('There was a problem processing your checkout. Please try again.');
+        
+        // Re-enable checkout button if there's an error
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        if (checkoutBtn) {
+            checkoutBtn.disabled = false;
+            checkoutBtn.textContent = 'Checkout';
+        }
     }
 }
+
+
 
 // Create a function for the scroll animation
 function initScrollAnimation() {
