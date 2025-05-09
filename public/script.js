@@ -548,7 +548,7 @@ async function checkout() {
         }
     }
 }
-
+    
 
 
 // Create a function for the scroll animation
