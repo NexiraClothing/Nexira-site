@@ -23,79 +23,103 @@
     
 <body>
     <div class="navbar">
-<!-- Hamburger Menu -->
-<div class="hamburger-menu">
-    <div class="menu-icon" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </div>
-    <div class="menu-content">
-        <a href="index.html">Home</a>
-        <div class="dropdown-item">
-            <div class="main-link-wrapper">
-                <a href="catalog.html" class="main-link">Catalog</a>
-                <i class="fas fa-chevron-right dropdown-arrow"></i>
+        <!-- Hamburger Menu -->
+        <div class="hamburger-menu">
+            <div class="menu-icon" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
             </div>
-            <div class="submenu">
-                <a href="#">T-Shirts</a>
-                <a href="#">Hoodies</a>
-                <a href="#">New Arrivals</a>
-            </div>
-        </div>
-        <div class="dropdown-item">
-            <div class="main-link-wrapper">
-                <a href="#" class="main-link">Help</a>
-                <i class="fas fa-chevron-right dropdown-arrow"></i>
-            </div>
-            <div class="submenu">
-                <a href="Returns.html">Returns</a>
-                <a href="Refunds.html">Refunds</a>
-                <a href="About-us.html">About Us</a>
+            <div class="menu-content">
+                <a href="index.html">Home</a>
+                <div class="dropdown-item">
+                    <a href="catalog.html" class="main-link">Catalog <i class="fas fa-chevron-right"></i></a>
+                    <div class="submenu">
+                        <a href="#">T-Shirts</a>
+                        <a href="#">Hoodies</a>
+                        <a href="#">New Arrivals</a>
+                    </div>
+                </div>
+                <div class="dropdown-item">
+                    <a href="#" class="main-link">Help <i class="fas fa-chevron-right"></i></a>
+                    <div class="submenu">
+                        <a href="Returns.html">Returns</a>
+                        <a href="Refunds.html">Refunds</a>
+                        <a href="About-us.html">About Us</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-        <div id="overlay"></div>
-<!-- Logo -->
-<a href="index.html">
-    <video class="logo" autoplay muted loop playsinline>
-        <source src="Nexira-Images/NewAnimationNexira.mp4" type="video/mp4">
-    </video>
-</a>
-        <!-- Cart Icon -->
-        <div class="cart-container" onclick="openCartModal()">
-            <i class="fas fa-shopping-cart cart-icon"></i>
-            <div class="cart-count">0</div>
+    
+        <!-- Logo -->
+        <a href="index.html" class="logo-container">
+            <video class="logo" autoplay muted loop playsinline>
+                <source src="Nexira-Images/NewAnimationNexira.mp4" type="video/mp4">
+            </video>
+        </a>
+    
+        <!-- Right Side Icons -->
+        <div class="nav-right">
+            <!-- Search Icon -->
+            <div class="search-wrapper">
+                <div class="search-container">
+                    <input type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search products..."
+                        aria-label="Search products">
+                        
+                    <button class="search-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+    
+            <!-- Cart Icon -->
+            <div class="cart-container" onclick="openCartModal()">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                <div class="cart-count">0</div>
+            </div>
         </div>
     </div>
     
-<!-- Cart Modal -->
-<div id="cartModal" class="cart-modal">
-    <div class="cart-modal-content">
-        <span class="close-cart" onclick="closeCartModal()">&times;</span>
-        <h3>Your Cart</h3>
-        <div id="cartItems">
-            <!-- Cart items will be inserted here -->
+    <!-- Overlay -->
+    <div id="overlay"></div>
+    
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-cart" onclick="closeCartModal()">&times;</span>
+            <h3>Your Cart</h3>
+            <div id="cartItems">
+                <!-- Cart items will be inserted here -->
+            </div>
+            <div id="cartTotal">Total: £0.00</div>
+            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
         </div>
-        <div id="cartTotal">Total: £0.00</div>
-        <button id="checkoutBtn" onclick="checkout()">Checkout</button>
     </div>
-</div>
-
+    
+<!-- First Products -->
 <div class="main-content-wrapper">
+    <div class="search-container">
+        <input type="text" 
+               id="productSearch" 
+               class="search-input" 
+               placeholder="Search products..."
+               aria-label="Search products">
+    </div>
+    
     <div class="catalog-container">
         <div class="product-row">
+            <!-- First Product Card -->
             <div class="product-card">
                 <div class="product-container">
                     <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
-                   <span class="expand-hint">*click to expand*</span>
-                   <div class="product-images">
-                    <img src="Nexira-Images/Nexira-zipup-black.png" 
-                         class="product-image" 
-                         alt="Zip-up hoodie">
-                </div>
-                
-                
+                    <span class="expand-hint">*click to expand*</span>
+                    <div class="product-images">
+                        <img src="Nexira-Images/Nexira-zipup-black.png" 
+                             class="product-image" 
+                             alt="Zip-up hoodie">
+                    </div>
+                    
                     <p class="price">£32.99</p> 
                     
                     <div class="product-details">
@@ -106,7 +130,139 @@
                             <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
                         </div>
                         
+                        <div class="color-selection">
+                            <button class="shirt-color-square" 
+                                    data-color="black" 
+                                    style="background-color: #0b0b0b"
+                                    onclick="selectShirtColor(this, 'black')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="navy" 
+                                    style="background-color: #15263c"
+                                    onclick="selectShirtColor(this, 'navy')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="grey" 
+                                    style="background-color: #3c3d44"
+                                    onclick="selectShirtColor(this, 'grey')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="royal" 
+                                    style="background-color: #1d57a5"
+                                    onclick="selectShirtColor(this, 'royal')"></button>
                         </div>
+                        <button onclick="addProductToCart('ZIPUP', selectedSize, selectedColor)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Product Card -->
+            <div class="product-card">
+                <div class="product-container">
+                    <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
+                    <span class="expand-hint">*click to expand*</span>
+                    <div class="product-images">
+                        <img src="Nexira-Images/Nexira-zipup-black.png" 
+                             class="product-image" 
+                             alt="Zip-up hoodie">
+                    </div>
+                    
+                    <p class="price">£32.99</p> 
+                    
+                    <div class="product-details">
+                        <div class="size-selection">
+                            <button class="size-button" data-size="S" onclick="selectSize('S', event)">S</button>
+                            <button class="size-button" data-size="M" onclick="selectSize('M', event)">M</button>
+                            <button class="size-button" data-size="L" onclick="selectSize('L', event)">L</button>
+                            <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
+                        </div>
+                        
+                        <div class="color-selection">
+                            <button class="shirt-color-square" 
+                                    data-color="black" 
+                                    style="background-color: #0b0b0b"
+                                    onclick="selectShirtColor(this, 'black')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="navy" 
+                                    style="background-color: #15263c"
+                                    onclick="selectShirtColor(this, 'navy')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="grey" 
+                                    style="background-color: #3c3d44"
+                                    onclick="selectShirtColor(this, 'grey')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="royal" 
+                                    style="background-color: #1d57a5"
+                                    onclick="selectShirtColor(this, 'royal')"></button>
+                        </div>
+                        <button onclick="addProductToCart('ZIPUP', selectedSize, selectedColor)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third Product Card -->
+            <div class="product-card">
+                <div class="product-container">
+                    <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
+                    <span class="expand-hint">*click to expand*</span>
+                    <div class="product-images">
+                        <img src="Nexira-Images/Nexira-zipup-black.png" 
+                             class="product-image" 
+                             alt="Zip-up hoodie">
+                    </div>
+                    
+                    <p class="price">£32.99</p> 
+                    
+                    <div class="product-details">
+                        <div class="size-selection">
+                            <button class="size-button" data-size="S" onclick="selectSize('S', event)">S</button>
+                            <button class="size-button" data-size="M" onclick="selectSize('M', event)">M</button>
+                            <button class="size-button" data-size="L" onclick="selectSize('L', event)">L</button>
+                            <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
+                        </div>
+                        
+                        <div class="color-selection">
+                            <button class="shirt-color-square" 
+                                    data-color="black" 
+                                    style="background-color: #0b0b0b"
+                                    onclick="selectShirtColor(this, 'black')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="navy" 
+                                    style="background-color: #15263c"
+                                    onclick="selectShirtColor(this, 'navy')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="grey" 
+                                    style="background-color: #3c3d44"
+                                    onclick="selectShirtColor(this, 'grey')"></button>
+                            <button class="shirt-color-square" 
+                                    data-color="royal" 
+                                    style="background-color: #1d57a5"
+                                    onclick="selectShirtColor(this, 'royal')"></button>
+                        </div>
+                        <button onclick="addProductToCart('ZIPUP', selectedSize, selectedColor)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Fourth Product Card -->
+            <div class="product-card">
+                <div class="product-container">
+                    <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
+                    <span class="expand-hint">*click to expand*</span>
+                    <div class="product-images">
+                        <img src="Nexira-Images/Nexira-zipup-black.png" 
+                             class="product-image" 
+                             alt="Zip-up hoodie">
+                    </div>
+                    
+                    <p class="price">£32.99</p> 
+                    
+                    <div class="product-details">
+                        <div class="size-selection">
+                            <button class="size-button" data-size="S" onclick="selectSize('S', event)">S</button>
+                            <button class="size-button" data-size="M" onclick="selectSize('M', event)">M</button>
+                            <button class="size-button" data-size="L" onclick="selectSize('L', event)">L</button>
+                            <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
+                        </div>
+                        
                         <div class="color-selection">
                             <button class="shirt-color-square" 
                                     data-color="black" 
@@ -132,6 +288,7 @@
         </div>  
     </div>
 </div>
+
               
 
 <!-- FOOTER -->

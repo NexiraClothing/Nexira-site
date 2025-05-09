@@ -50,32 +50,38 @@
                 </div>
             </div>
         </div>
-        <div id="overlay"></div>
-<!-- Logo -->
-<a href="index.html">
-    <video class="logo" autoplay muted loop playsinline>
-        <source src="Nexira-Images/NewAnimationNexira.mp4" type="video/mp4">
-    </video>
-</a>
-        <!-- Cart Icon -->
-        <div class="cart-container" onclick="openCartModal()">
-            <i class="fas fa-shopping-cart cart-icon"></i>
-            <div class="cart-count">0</div>
+    
+        <!-- Logo -->
+        <a href="index.html" class="logo-container">
+            <video class="logo" autoplay muted loop playsinline>
+                <source src="Nexira-Images/NewAnimationNexira.mp4" type="video/mp4">
+            </video>
+        </a>
+            
+            <!-- Cart Icon -->
+            <div class="cart-container" onclick="openCartModal()">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                <div class="cart-count">0</div>
+            </div>
         </div>
     </div>
     
-<!-- Cart Modal -->
-<div id="cartModal" class="cart-modal">
-    <div class="cart-modal-content">
-        <span class="close-cart" onclick="closeCartModal()">&times;</span>
-        <h3>Your Cart</h3>
-        <div id="cartItems">
-            <!-- Cart items will be inserted here -->
+    <!-- Overlay -->
+    <div id="overlay"></div>
+    
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-cart" onclick="closeCartModal()">&times;</span>
+            <h3>Your Cart</h3>
+            <div id="cartItems">
+                <!-- Cart items will be inserted here -->
+            </div>
+            <div id="cartTotal">Total: £0.00</div>
+            <button id="checkoutBtn" onclick="checkout()">Checkout</button>
         </div>
-        <div id="cartTotal">Total: £0.00</div>
-        <button id="checkoutBtn" onclick="checkout()">Checkout</button>
     </div>
-</div>
+    
 
     <!-- PRODUCT SECTION -->
     <html lang="en">
