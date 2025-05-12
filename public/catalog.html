@@ -97,7 +97,20 @@
         </div>
     </div>
     
-<!-- First Products -->
+<!--Products -->
+<div class="main-content-wrapper">
+    <div class="search-container">
+        <input type="text" 
+               id="productSearch" 
+               class="search-input" 
+               placeholder="Search products..."
+               aria-label="Search products">
+    </div>
+    
+    <div class="catalog-container">
+        <div class="product-row">
+            <!-- First Product Card -->
+<!--Products -->
 <div class="main-content-wrapper">
     <div class="search-container">
         <input type="text" 
@@ -112,6 +125,11 @@
             <!-- First Product Card -->
             <div class="product-card">
                 <div class="product-container">
+                    <!-- Info button in the corner -->
+                    <button class="info-button" onclick="openProductInfo('zipup', event)">
+                        <i class="fas fa-info-circle"></i>
+                    </button>
+                    
                     <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
                     <span class="expand-hint">*click to expand*</span>
                     <div class="product-images">
@@ -120,140 +138,7 @@
                              alt="Zip-up hoodie">
                     </div>
                     
-                    <p class="price">£32.99</p> 
-                    
-                    <div class="product-details">
-                        <div class="size-selection">
-                            <button class="size-button" data-size="S" onclick="selectSize('S', event)">S</button>
-                            <button class="size-button" data-size="M" onclick="selectSize('M', event)">M</button>
-                            <button class="size-button" data-size="L" onclick="selectSize('L', event)">L</button>
-                            <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
-                        </div>
-                        
-                        <div class="color-selection">
-                            <button class="shirt-color-square" 
-                                    data-color="black" 
-                                    style="background-color: #0b0b0b"
-                                    onclick="selectShirtColor(this, 'black')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="navy" 
-                                    style="background-color: #15263c"
-                                    onclick="selectShirtColor(this, 'navy')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="grey" 
-                                    style="background-color: #3c3d44"
-                                    onclick="selectShirtColor(this, 'grey')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="royal" 
-                                    style="background-color: #1d57a5"
-                                    onclick="selectShirtColor(this, 'royal')"></button>
-                        </div>
-                        <button onclick="addProductToCart('ZIPUP', selectedSize, selectedColor)">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Second Product Card -->
-            <div class="product-card">
-                <div class="product-container">
-                    <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
-                    <span class="expand-hint">*click to expand*</span>
-                    <div class="product-images">
-                        <img src="Nexira-Images/Nexira-zipup-black.png" 
-                             class="product-image" 
-                             alt="Zip-up hoodie">
-                    </div>
-                    
-                    <p class="price">£32.99</p> 
-                    
-                    <div class="product-details">
-                        <div class="size-selection">
-                            <button class="size-button" data-size="S" onclick="selectSize('S', event)">S</button>
-                            <button class="size-button" data-size="M" onclick="selectSize('M', event)">M</button>
-                            <button class="size-button" data-size="L" onclick="selectSize('L', event)">L</button>
-                            <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
-                        </div>
-                        
-                        <div class="color-selection">
-                            <button class="shirt-color-square" 
-                                    data-color="black" 
-                                    style="background-color: #0b0b0b"
-                                    onclick="selectShirtColor(this, 'black')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="navy" 
-                                    style="background-color: #15263c"
-                                    onclick="selectShirtColor(this, 'navy')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="grey" 
-                                    style="background-color: #3c3d44"
-                                    onclick="selectShirtColor(this, 'grey')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="royal" 
-                                    style="background-color: #1d57a5"
-                                    onclick="selectShirtColor(this, 'royal')"></button>
-                        </div>
-                        <button onclick="addProductToCart('ZIPUP', selectedSize, selectedColor)">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Third Product Card -->
-            <div class="product-card">
-                <div class="product-container">
-                    <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
-                    <span class="expand-hint">*click to expand*</span>
-                    <div class="product-images">
-                        <img src="Nexira-Images/Nexira-zipup-black.png" 
-                             class="product-image" 
-                             alt="Zip-up hoodie">
-                    </div>
-                    
-                    <p class="price">£32.99</p> 
-                    
-                    <div class="product-details">
-                        <div class="size-selection">
-                            <button class="size-button" data-size="S" onclick="selectSize('S', event)">S</button>
-                            <button class="size-button" data-size="M" onclick="selectSize('M', event)">M</button>
-                            <button class="size-button" data-size="L" onclick="selectSize('L', event)">L</button>
-                            <button class="size-button" data-size="XL" onclick="selectSize('XL', event)">XL</button>
-                        </div>
-                        
-                        <div class="color-selection">
-                            <button class="shirt-color-square" 
-                                    data-color="black" 
-                                    style="background-color: #0b0b0b"
-                                    onclick="selectShirtColor(this, 'black')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="navy" 
-                                    style="background-color: #15263c"
-                                    onclick="selectShirtColor(this, 'navy')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="grey" 
-                                    style="background-color: #3c3d44"
-                                    onclick="selectShirtColor(this, 'grey')"></button>
-                            <button class="shirt-color-square" 
-                                    data-color="royal" 
-                                    style="background-color: #1d57a5"
-                                    onclick="selectShirtColor(this, 'royal')"></button>
-                        </div>
-                        <button onclick="addProductToCart('ZIPUP', selectedSize, selectedColor)">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- Fourth Product Card -->
-            <div class="product-card">
-                <div class="product-container">
-                    <h2 class="product-title">Nexira Zip-Up Hoodie</h2>
-                    <span class="expand-hint">*click to expand*</span>
-                    <div class="product-images">
-                        <img src="Nexira-Images/Nexira-zipup-black.png" 
-                             class="product-image" 
-                             alt="Zip-up hoodie">
-                    </div>
-                    
-                    <p class="price">£32.99</p> 
+                    <p class="price">£32.99</p>
                     
                     <div class="product-details">
                         <div class="size-selection">
@@ -289,6 +174,105 @@
     </div>
 </div>
 
+<!-- Product Info Modal for Zip-Up Hoodie -->
+<div id="zipupInfoModal" class="product-info-modal">
+    <div class="product-info-content">
+        <span class="close-product-info" onclick="closeProductInfo('zipup')">&times;</span>
+        <h3>Nexira Zip-Up Hoodie</h3>
+        
+        <div class="product-info-tabs">
+            <button class="tab-button active" onclick="openTab('zipup', 'description', event)">Description</button>
+            <button class="tab-button" onclick="openTab('zipup', 'sizeGuide', event)">Size Guide</button>
+            <button class="tab-button" onclick="openTab('zipup', 'materials', event)">Materials</button>
+        </div>
+        
+        <div id="zipup-description" class="tab-content active">
+            <p> Step into effortless style with the Nexira Zip-Up Hoodie—built for comfort, built to last. Lined with ultra-soft fleece inside and out, this hoodie delivers warmth without the bulk. Whether you're layering for the streets or lounging off-duty, the premium metal zipper and bold silhouette make it a staple in any fit. Designed with clean overlaps for full-front print perfection, this piece reps Nexira’s blend of form and function</p>
+            <ul>
+            </ul>
+            <p>Available in multiple colors to match your style.</p>
+        </div>
+        
+        <div id="zipup-sizeGuide" class="tab-content">
+            <h4>Size Guide</h4>
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Length (inches)</th>
+                        <th>Width (inches)</th>
+                        <th>Sleeve Length (inches)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S</td>
+                        <td>27</td>
+                        <td>19 ¼</td>
+                        <td>33 ½</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>28</td>
+                        <td>21 ¼</td>
+                        <td>34 ½</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>29</td>
+                        <td>23 ¼</td>
+                        <td>35 ½</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>30</td>
+                        <td>25 ¼</td>
+                        <td>36 ½</td>
+                    </tr>
+                    <tr>
+                        <td>2XL</td>
+                        <td>31</td>
+                        <td>27 ¼</td>
+                        <td>37 ½</td>
+                    </tr>
+                    <tr>
+                        <td>3XL</td>
+                        <td>32</td>
+                        <td>29 ¼</td>
+                        <td>38 ½</td>
+                    </tr>
+                    <tr>
+                        <td>4XL</td>
+                        <td>33</td>
+                        <td>31 ¼</td>
+                        <td>39 ½</td>
+                    </tr>
+                    <tr>
+                        <td>5XL</td>
+                        <td>34</td>
+                        <td>32 ¼</td>
+                        <td>40 ½</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="zipup-materials" class="tab-content">
+            <h4>Materials</h4>
+            <p>Our Zip-Up Hoodie is crafted from:</p>
+            <ul>
+                <li>50% cotton</li>
+                <li>50% polyester</li>
+                <li>8 oz/yd² (271 g/m²) fleece</li>
+                <li>20 singles yarn</li>
+                <li>Air-jet spun for reduced pilling</li>
+                <li>Soft brushed fleece interior and exterior</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
               
 
 <!-- FOOTER -->
@@ -319,6 +303,76 @@
 </div>
 
         <script src="script.js"></script>
+        <!-- Zip-up Hoodie Size Guide Modal -->
+<div id="zipupSizeGuideModal" class="size-guide-modal">
+    <div class="size-guide-content">
+        <span class="close-size-guide" onclick="closeSizeGuide('zipup')">&times;</span>
+        <h3>Zip-Up Hoodie Size Guide</h3>
+        <div class="size-guide-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Size</th>
+                        <th>Length (inches)</th>
+                        <th>Width (inches)</th>
+                        <th>Sleeve Length (inches)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S</td>
+                        <td>27</td>
+                        <td>19 ¼</td>
+                        <td>33 ½</td>
+                    </tr>
+                    <tr>
+                        <td>M</td>
+                        <td>28</td>
+                        <td>21 ¼</td>
+                        <td>34 ½</td>
+                    </tr>
+                    <tr>
+                        <td>L</td>
+                        <td>29</td>
+                        <td>23 ¼</td>
+                        <td>35 ½</td>
+                    </tr>
+                    <tr>
+                        <td>XL</td>
+                        <td>30</td>
+                        <td>25 ¼</td>
+                        <td>36 ½</td>
+                    </tr>
+                    <tr>
+                        <td>2XL</td>
+                        <td>31</td>
+                        <td>27 ¼</td>
+                        <td>37 ½</td>
+                    </tr>
+                    <tr>
+                        <td>3XL</td>
+                        <td>32</td>
+                        <td>29 ¼</td>
+                        <td>38 ½</td>
+                    </tr>
+                    <tr>
+                        <td>4XL</td>
+                        <td>33</td>
+                        <td>31 ¼</td>
+                        <td>39 ½</td>
+                    </tr>
+                    <tr>
+                        <td>5XL</td>
+                        <td>34</td>
+                        <td>32 ¼</td>
+                        <td>40 ½</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
     </body>
     </html>
     

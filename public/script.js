@@ -1,3 +1,58 @@
+function openSizeGuide(productType) {
+    // Get the event object safely
+    const evt = window.event || arguments.callee.caller.arguments[0];
+    if (evt) {
+        evt.stopPropagation();
+    }
+    
+    // Close any open modals
+    document.querySelectorAll('.size-guide-modal').forEach(modal => {
+        modal.style.display = 'none';
+    });
+    
+    // Show the overlay with a different class for size guides
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+        overlay.style.display = 'block';
+        overlay.classList.add('size-guide-overlay'); // Add a special class for size guide overlays
+    }
+    
+    // Show the appropriate size guide
+    const sizeGuideModal = document.getElementById(productType + 'SizeGuideModal');
+    if (sizeGuideModal) {
+        sizeGuideModal.style.display = 'block';
+        
+        // Add click event to close when clicking outside the modal
+        sizeGuideModal.addEventListener('click', function(e) {
+            if (e.target === sizeGuideModal) {
+                closeSizeGuide(productType);
+            }
+        }, { once: true });
+    }
+    
+    // Don't prevent scrolling for size guides
+    document.body.style.overflow = '';
+}
+
+function closeSizeGuide(productType) {
+    // Hide the size guide
+    const sizeGuideModal = document.getElementById(productType + 'SizeGuideModal');
+    if (sizeGuideModal) {
+        sizeGuideModal.style.display = 'none';
+    }
+    
+    // Hide the overlay if no other modals are open
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+        overlay.classList.remove('size-guide-overlay'); // Remove the special class
+        
+        if (!document.querySelector('.modal[style*="display: block"]') && 
+            !document.querySelector('.cart-modal[style*="display: block"]')) {
+            overlay.style.display = 'none';
+        }
+    }
+}
+
 function selectShirtColor(element, color) {
     event.stopPropagation();
     console.log('Shirt color selected:', color); // Debug log
@@ -203,7 +258,70 @@ function closeCartModal() {
         overlay.style.display = 'none';
     }
 }
+function closeCartModal() {
+    const cartModal = document.getElementById('cartModal');
+    const overlay = document.getElementById('overlay');
+    if (cartModal && overlay) {
+        cartModal.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+}
 
+// ADD THE NEW FUNCTIONS HERE
+// Product Info Modal Functions
+function openProductInfo(productType, event) {
+    event.stopPropagation(); // Prevent event bubbling
+    
+    // Show the overlay
+    const overlay = document.getElementById('overlay');
+    if (overlay) {
+        overlay.style.display = 'block';
+    }
+    
+    // Show the product info modal
+    const infoModal = document.getElementById(productType + 'InfoModal');
+    if (infoModal) {
+        infoModal.style.display = 'block';
+    }
+}
+
+function closeProductInfo(productType) {
+    // Hide the product info modal
+    const infoModal = document.getElementById(productType + 'InfoModal');
+    if (infoModal) {
+        infoModal.style.display = 'none';
+    }
+    
+    // Hide the overlay if no other modals are open
+    const overlay = document.getElementById('overlay');
+    if (overlay && !document.querySelector('.modal[style*="display: block"]') && 
+        !document.querySelector('.cart-modal[style*="display: block"]')) {
+        overlay.style.display = 'none';
+    }
+}
+
+function openTab(productType, tabName, event) {
+    // Hide all tab contents
+    const tabContents = document.querySelectorAll(`[id^="${productType}-"]`);
+    tabContents.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show the selected tab content
+    const selectedTab = document.getElementById(`${productType}-${tabName}`);
+    if (selectedTab) {
+        selectedTab.classList.add('active');
+    }
+    
+    // Update tab button active states
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Set the clicked tab button as active
+    event.target.classList.add('active');
+}
 
 // ===============================
 // CUSTOMIZATION FUNCTIONS
@@ -548,7 +666,7 @@ async function checkout() {
         }
     }
 }
-    
+
 
 
 // Create a function for the scroll animation
